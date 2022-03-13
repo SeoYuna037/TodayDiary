@@ -1,0 +1,150 @@
+/* 웹폰트 */
+@font-face {
+    font-family: 'Cafe24Ohsquareair';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/Cafe24Ohsquareair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cafe24Ohsquareair',serif;
+    border:none;
+    outline: none;
+}
+a{
+    text-decoration: none;
+}
+/* ##########login########## */
+.login-page{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    width: 100%;
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+}
+.login-logo{
+    text-align: center;
+    color: white;
+}
+.login-logo h1{
+    font-size: 3rem;
+    font-weight: normal;
+}
+.login-logo span{
+    font-weight:bold;
+    font-size: 0.8rem;
+}
+.login-form{
+    margin: 2rem;
+    padding: 4rem;
+    box-shadow: 0 0 20px #4c4f5544;
+    background-color: #fff;
+    width: 500px;
+    display: block;
+    border-radius: 10px;
+}
+.login-form h1{
+    font-size: 2rem;
+    text-align: center;
+    margin-bottom: 30px;
+}
+.login-form .login-field{
+    display: flex;
+    font-weight: 600;
+    font-size: 1.2rem;
+    margin-top:40px;
+    align-items: center;
+}
+.login-field i{
+    font-size: 1.8rem;
+    padding-right: 0.5rem;
+}
+.login-form input[type='text'],
+.login-form input[type='password']{
+    width: 100%;
+    padding: 0.6rem 0;
+    border-bottom: 1px solid #ddd;
+    color: #000;
+    font-family:"굴림";
+}
+.login-form input[type='text']::placeholder,
+.login-form input[type='password']::placeholder{
+    color: #acbcd8;
+    transition: 0.3s;
+}
+.login-form input[type='text']:focus,
+.login-form input[type='password']:focus,
+.login-form input[type='email']:focus{
+    border-color: #999;
+}
+.login-form input[type='text']:focus::placeholder,
+.login-form input[type='password']:focus::placeholder,
+.login-form input[type='email']:focus::placeholder{
+    opacity: 0;
+}
+.login-form input[type=button]{
+    display: block;
+    padding: 1rem 2rem;
+    margin: 2rem auto;
+    font-weight: bold;
+    font-size: 1.2rem;
+    border-radius: 20px;
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    color: #fff;
+    text-transform: uppercase;
+    box-shadow: 0 0 10px #4c4f5544;
+    cursor: pointer;
+}
+.sign-up{
+    text-align: center;
+    font-size: 0.8rem;
+}
+.sign-up a{
+    color: #000;
+}
+.sign-up a:hover{
+    text-decoration: underline;
+}
+/* ########## Main Page ########## */
+header{
+    background-color: rgb(201, 187, 224);
+    height: 130px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    position: relative;
+    padding: 0 50px;
+}
+header .logo img{
+    height: 130px;
+    width: 130px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    margin-top: 8px;
+}
+header .logo span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 2rem;
+    color: #fff;
+}
+.header .login-button{
+    position: absolute;
+    top: 50%;
+    right: 50px;
+    transform: translateY(-50%);
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    border: 3px solid #fff;
+}
+.header .login-button a{
+    color: #fff;
+    font-weight: 600;
+}
