@@ -19,12 +19,12 @@
             <form action class="login-form">
                 <h1>회원가입</h1>
                 <span class="login-field"><i class="xi-user-o"></i>사용자 아이디</span>
-                <input type="text" required maxlength="15" placeholder="아이디를 입력하세요">
+                <input type="text" id="user-id" placeholder="아이디를 입력하세요">
                 <span class="login-field"><i class="xi-mail-o"></i>사용자 이메일</span>
-                <input type="text" required placeholder="이메일을 입력하세요">
+                <input type="text" id="user-email" placeholder="이메일을 입력하세요">
                 <span class="login-field"><i class="xi-lock-o"></i>사용자 비밀번호</span>
-                <input type="password" required minlength="6" maxlength="15" placeholder="비밀번호를 입력하세요">
-                <input type="button" value="Sing up">
+                <input type="password" id="user-password" placeholder="비밀번호를 입력하세요">
+                <input type="button" id="sub-btn" value="Sign up">
                 <div class="sign-up">
                     <span>이미 계정이 있으신가요?</span>
                     <a href="index.html">로그인하기</a>
@@ -34,26 +34,91 @@
     </section>
 
 
-
     <script type="module">
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-app.js";
-
+        // TODO: Add SDKs for Firebase products that you want to use
+        // https://firebase.google.com/docs/web/setup#available-libraries
+      
+        // Your web app's Firebase configuration
         const firebaseConfig = {
-          apiKey: "AIzaSyD0Bu4eiU8QFmqu1OJYIvQZPsbj6lNRySE",
-          authDomain: "firevdiary.firebaseapp.com",
-          databaseURL: "https://firevdiary-default-rtdb.firebaseio.com",
-          projectId: "firevdiary",
-          storageBucket: "firevdiary.appspot.com",
-          messagingSenderId: "595069993096",
-          appId: "1:595069993096:web:abef011db109ddcd1e9f3d"
+          apiKey: "AIzaSyCg8ul1Mqi0UIXY3nF6vwnkHrXkO-I5DPM",
+          authDomain: "firediay.firebaseapp.com",
+          databaseURL: "https://firediay-default-rtdb.firebaseio.com",
+          projectId: "firediay",
+          storageBucket: "firediay.appspot.com",
+          messagingSenderId: "565944170521",
+          appId: "1:565944170521:web:b258542056bf60158d1288"
         };
       
         // Initialize Firebase
         const app = initializeApp(firebaseConfig);
-
-        import {getDatabase, ref, set, child, get} from "https://www.gstatic.com/firebasejs/9.6.3/firebase-database.js"
+        import{ getDatabase, ref, set, child,get } from "https://www.gstatic.com/firebasejs/9.6.8/firebase-database.js"
         const db=getDatabase();
+        // 
+        const name=document.getElementById('user-id');
+        const email=document.getElementById('user-email');
+        const pass=document.getElementById('user-password');
+        const submit=document.getElementById('sub-btn')
+        // VALIDATION
+        function isEmptyOrSpaces(str){
+            return str===null || str.match(/^ *$/) !== null;
+        }
+        function Validation(){
+            let nameregex=/^[a-zA-Z0-9]+$/;
+            let emailregex=/^[a-zA-Z0-9]+@(gmail|yahoo|outlook|test)\.com$/;
+            let passwordregex=/^[a-zA-Z0-9]{5,13}$/;
+            if(isEmptyOrSpaces(name.value) || isEmptyOrSpaces(email.value) || isEmptyOrSpaces(pass.value)){
+                alert("공백을 지워주세요");
+                return false
+            }
+            if(!nameregex.test(name.value)){
+                alert("아이디는 알파벳과 숫자로 구성되어야합니다")
+                return false;
+            }
+            if(!emailregex.test(email.value)){
+                alert("유효한 이메일이 아닙니다")
+                return false;
+            }
+            if(!passwordregex.test(pass.value)){
+                alert("비밀번호는 알파벳과 숫자로 구성된 5자 이상 13자 이하여야합니다")
+                return false;
+            }
+            return true;
+        }
+        // 
+        function registerUser(){
+            if(!Validation()){
+                return;
+            }
+            const dbRef=ref(db);
+            get(child(dbRef,"UsersList/" + name.value)).then((snapshot)=>{
+                if(snapshot.exists()){
+                    alert("이미 계정 존재");
+                }
+                else{
+                    set(ref(db,"UsersList/" + name.value),{
+                        userid:name.value,
+                        email:email.value,
+                        password:pass.value
+                    })
+                    .then(()=>{
+                        alert("회원가입 완료");
+                    })
+                    .catch((error)=>{
+                        alert("error"+error);
+                    })
+                }
+            });
+        }
+        // 
+        // function encrypass(){
+        //     var pass12=CryptoJS.AES.encrypto(pass.value,pass.value);
+        //     return pass12.toString();
+        // }
+        // 
+        submit.addEventListener('click',registerUser);
       </script>
 </body>
+
 </html>
