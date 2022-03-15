@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
+    <title>Today Diary</title>
+</head>
+<body>
+    <header>
+        <div class="header">
+            <div class="logo">
+                <img src="img/Today diary logo white.png" alt="">
+                <span>Today Diary</span>
+            </div>
+            <div class="login-button">
+                <a href="" class="nav-link" id="signoutlink">LOGOUT</a>
+            </div>
+        </div>
+    </header>
+    
+    <section class="main">
+        <aside class="todo-list">
+            <div>
+                <h1>ToDo List</h1>
+                <div class="todo-lists"></div>
+                <div class="plus-todo">
+                    <input type="text" placeholder="할 일을 입력하세요">
+                    <input type="button" value="PLUS">
+                </div>
+            </div>
+        </aside>
+        <article class="diary">
+            <div class="diary-list">
+                <!-- <a href="#none" class="diary-link">
+                    <div class="diary-info">
+                        <img src="img/Today diary logo.png" alt="">
+                        <div class="diary-desc">
+                            <h1>첫번째 다이어리</h1>
+                        </div>
+                    </div>
+                </a> -->
+            </div>
+            <a href="#none" class="plus-diary">
+                <i class="xi-plus-thin"></i>
+            </a>
+        </article>
+    </section>
+    <script src="/__/firebase/8.6.5/firebase-app.js"></script>
+    <script src="/__/firebase/8.6.5/firebase-auth.js"></script>
+    <script src="/__/firebase/8.6.5/firebase-database.js"></script>
+    <script src="/__/firebase/8.6.5/firebase-firestore.js"></script>
+    <script src="/__/firebase/8.6.5/firebase-storage.js"></script> 
+    <script>
+        
+        var firebaseConfig = {
+          apiKey: "AIzaSyCg8ul1Mqi0UIXY3nF6vwnkHrXkO-I5DPM",
+          authDomain: "firediay.firebaseapp.com",
+          databaseURL: "https://firediay-default-rtdb.firebaseio.com",
+          projectId: "firediay",
+          storageBucket: "firediay.appspot.com",
+          messagingSenderId: "565944170521",
+          appId: "1:565944170521:web:b258542056bf60158d1288"
+        };
+        firebase.initializeApp(firebaseConfig);
+    </script>
+    
+    <script>
+        const db=firebase.firestore();
+        db.collection('diary').get().then((snapshot)=>{
+            snapshot.forEach((doc)=>{
+                console.log(doc.data())
+                
+            diaryList=document.querySelector('.diary-list');
+            diaryList.insertAdjacentHTML('afterend',`<a href="#none" class="diary-link">
+                    <div class="diary-info">
+                        <img src="img/Today diary logo.png" alt="">
+                        <div class="diary-desc">
+                            <h1>첫번째 다이어리</h1>
+                        </div>
+                    </div>
+                </a>`)
+            })
+        }
+        )
+    </script>
+    <script>
+
+        let userlink=document.getElementById('userlink');
+        let signoutlink=document.getElementById('signoutlink');
+        var currentUser=null;
+        // 
+        function Signout(){
+            localStorage.removeItem('user');
+            window.location="index.html";
+        }
+        window.onload=function(){
+            currentUser=JSON.parse(localStorage.getItem('user'))
+            if(currentUser==null){
+                signoutlink.innerText="Login";
+                signoutlink.href="index.html";
+            }
+            else{
+                signoutlink.innerText="LOGOUT";
+            }
+        }
+        signoutlink.addEventListener('click',Signout)
+    </script>
+
+</body>
+</html>
