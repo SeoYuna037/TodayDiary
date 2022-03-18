@@ -157,6 +157,9 @@ aside{
     width: 30%;
     background-color: rgb(201, 187, 224);
     height: calc(100vh - 130px);
+    top: 130px;
+    left: 0;
+    position: fixed;
     text-align: center;
 }
 .todo-list h1{
@@ -176,8 +179,7 @@ aside{
 }
 .diary{
     width: 100%;
-    height: auto;
-    position: relative;
+    height: 100%;
 }
 .diary .diary-list{
     width: inherit;
@@ -201,6 +203,9 @@ aside{
 .diary .diary-info .diary-desc{
     color: #000;
     padding-top: 20px;
+}
+.main{
+    position: relative;
 }
 .plus-diary{
     position: absolute;
