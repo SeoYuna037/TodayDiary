@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="upload.css">
+    <link rel="stylesheet" href="main-style.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <title>Today Diary</title>
 </head>
@@ -20,16 +20,24 @@
             </div>
         </div>
     </header>
-    
     <section class="main">
-        
-        <article class="diary-upload">
-            <input type="text" id="diary-title" placeholder="제목을 입력하세요">
-            <textarea id="diary-content" cols="30" rows="10">내용을 입력하세요</textarea>
-            <input type="file" accept="image/*" id="diary-image">
-            <button id="diary-send">저장하기</button>
-        </article>
+            <article class="diary">
+                <div class="diary-list">
+                    <!-- <a href="#none" class="diary-link">
+                        <div class="diary-info">
+                            <img src="img/Today diary logo.png" alt="">
+                            <div class="diary-desc">
+                                <h1>첫번째 다이어리</h1>
+                            </div>
+                        </div>
+                    </a> -->
+                </div>
+            </article>
+        <a href="upload.html" class="plus-diary">
+            <i class="xi-plus-thin"></i>
+        </a>
     </section>
+    <script src="main.js"></script>
     <script src="/__/firebase/8.6.5/firebase-app.js"></script>
     <script src="/__/firebase/8.6.5/firebase-auth.js"></script>
     <script src="/__/firebase/8.6.5/firebase-database.js"></script>
@@ -48,45 +56,24 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
-    <script src="https://randojs.com/1.1.0.js"></script>
+    
     <script>
         const db=firebase.firestore();
-        const sendBtn=document.querySelector('#diary-send');
-        const diaTitle=document.querySelector('#diary-title');
-        const diaContent=document.querySelector('#diary-content');
-        const storage=firebase.storage();
-        const saveData=()=>{
-            var imageFile=document.querySelector('#diary-image').files[0];
-            var storageRef=storage.ref();
-            var metadata={contentType:file.type}
-            var saveDirection=storageRef.child('images/' + imageFile.name);
-            var uploadImage=saveDirection.put(imageFile,metadata);
-            uploadImage.on('state_changed',
-                null,
-                (error)=>{
-                    console.error('실패 사유는 ',error);
-                },
-                ()=>{
-                    uploadImage.snapshot.ref.getDownloadURL().then((url)=>{
-                        console.log('업로드 된 경로는',url);
-                        var diaryData={
-                            제목:diaTitle.value,
-                            내용:diaContent.value,
-                            날짜:new Date(),
-                            이미지:url,
-                            작성자:JSON.parse(localStorage.getItem('user')).userid
-                        }
-                        console.log(url);
-                        db.collection('diary').add(diaryData).then(()=>{
-                            window.location.href="/main.html"
-                        }).catch((err)=>{
-                            console.log(err);
-                        })
-                    });
-                }
-            )
+        db.collection('diary').where("작성자","==",JSON.parse(localStorage.getItem('user')).userid).get().then((snapshot)=>{
+            snapshot.forEach((doc)=>{
+                
+            diaryList=document.querySelector('.diary-list');
+            diaryList.insertAdjacentHTML('afterend',`<a href="read.html" class="diary-link">
+                    <div class="diary-info">
+                        <img src="${doc.data().이미지}" alt="">
+                        <div class="diary-desc">
+                            <h1>${doc.data().제목}</h1>
+                        </div>
+                    </div>
+                </a>`)
+            })
         }
-        sendBtn.addEventListener('click',saveData);
+        )
     </script>
     <script>
 
@@ -103,9 +90,11 @@
             if(currentUser==null){
                 signoutlink.innerText="Login";
                 signoutlink.href="index.html";
+                console.log(currentUser.userid);
             }
             else{
                 signoutlink.innerText="LOGOUT";
+                signoutlink.href="index.html";
             }
         }
         signoutlink.addEventListener('click',Signout)
