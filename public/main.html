@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="main-style.css">
+    <link rel="stylesheet" href="main.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <title>Today Diary</title>
 </head>
@@ -21,13 +21,23 @@
         </div>
     </header>
     
-    <aside class="todo-list">
+    <aside id="todo-list" class="todo-list">
         <div class="todo">
             <h1>ToDo List</h1>
-            <div class="todo-lists"></div>
-            <div class="plus-todo">
-                <input type="text" placeholder="할 일을 입력하세요">
-                <input type="button" value="PLUS">
+            <form class="plus-todo">
+                <input type="text" id="new-todo" placeholder="할 일을 입력하세요">
+                <input type="button" id="plus-todo" value="PLUS">
+            </form>
+            <div class="todo-list-action">
+                <!-- <div class="todo-content">
+                    <div class="todo-lists">
+                        <input type="text" class="todo-text" value="my-todo" readonly>
+                    </div>
+                    <div class="todo-action">
+                        <button class="todo-edit">Edit</button>
+                        <button class="todo-del">Delete</button>
+                    </div>
+                </div> -->
             </div>
             <div class="todolist-show">
                 <div class="todolist-show-btn">
@@ -73,28 +83,61 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
     
     <script>
         const db=firebase.firestore();
-        db.collection('diary').where("작성자","==",JSON.parse(localStorage.getItem('user')).userid).get().then((snapshot)=>{
+        db.collection('diary').where("작성자","==",JSON.parse(localStorage.getItem('user')).userid).orderBy('날짜').get().then((snapshot)=>{
             snapshot.forEach((doc)=>{
-            
             diaryList=document.querySelector('.diary-list');
-            diaryList.insertAdjacentHTML('afterend',`<a href="#" class="diary-link">
+            diaryList.insertAdjacentHTML('afterend',`<div class="diary-link">
                     <div class="diary-info">
                         <img src="${doc.data().이미지}" alt="">
                         <div class="diary-desc">
                             <h1>${doc.data().제목}</h1>
                         </div>
-                        
+                        <div class="diary-btn">
+                            <a href="/read.html?id=${doc.id}" class="diary-view">VIEW</a>
+                        </div>
                     </div>
-                </a>`)
+                </div>`);
+                
             })
         }
         )
-        
-
     </script>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
+    <script>
+        const todoText=document.querySelector('#new-todo');
+        const todoBtn=document.querySelector('#plus-todo');
+        todoBtn.addEventListener('click',function(){
+            var todayDo={
+                할일:todoText.value,
+                writer:JSON.parse(localStorage.getItem('user')).userid,
+                Date:new Date()
+            }
+            db.collection('todo').add(todayDo);
+        })
+        db.collection('todo').where("writer","==",JSON.parse(localStorage.getItem('user')).userid).orderBy('Date').onSnapshot((snapshot)=>{
+            $('.todo-content').html('');
+            snapshot.forEach((doc)=>{
+            var todoList=document.querySelector('.todo-list-action');
+            todoList.insertAdjacentHTML('afterend',`
+                <div class="todo-content">
+                    <div class="todo-lists">
+                        <input type="text" class="todo-text" value="${doc.data().할일}" readonly>
+                        <button class="todo-del">DEL</button>
+                    </div>
+                </div>`);
+                document.querySelector('.todo-del').addEventListener('click',function(){
+                    db.collection('todo').doc(doc.id).delete().then((result)=>{
+                        console.log()
+                    })
+                })
+            })
+        }
+        )
+        </script>
     <script>
 
         let userlink=document.getElementById('userlink');

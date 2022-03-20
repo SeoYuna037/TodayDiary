@@ -5,3 +5,4 @@ todoShowBtn.addEventListener('click',function(){
     document.querySelector(".xi-angle-right-thin").classList.toggle('active');
     document.querySelector(".xi-angle-left-thin").classList.toggle('active');
 });
+

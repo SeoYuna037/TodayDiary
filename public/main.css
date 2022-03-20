@@ -1,0 +1,228 @@
+/* 웹폰트 */
+@font-face {
+    font-family: 'Cafe24Ohsquareair';
+    src: url('https://cdn.jsdelivr.net/gh/projectnoonnu/noonfonts_2202@1.0/Cafe24Ohsquareair.woff') format('woff');
+    font-weight: normal;
+    font-style: normal;
+}
+*{
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Cafe24Ohsquareair',serif;
+    border:none;
+    outline: none;
+}
+body{
+    padding-top: 130px;
+}
+a{
+    text-decoration: none;
+}
+/* ########## Main Page ########## */
+header{
+    position: fixed;
+    z-index: 10;
+    width: 100%;
+    top: 0;
+
+}
+.header{
+    background-color: rgb(201, 187, 224);
+    height: 130px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: relative;
+    padding: 0 50px;
+    margin: auto;
+}
+.header .logo img{
+    height: 130px;
+    width: 130px;
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+}
+.header .logo span{
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%,-50%);
+    font-size: 1.5rem;
+    color: #fff;
+}
+.header .login-button{
+    position: absolute;
+    top: 50%;
+    right: 50px;
+    transform: translateY(-50%);
+    background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
+    padding: 1rem 2rem;
+    border-radius: 20px;
+    border: 3px solid #fff;
+    font-size: 0.8rem;
+}
+.header .login-button a{
+    color: #fff;
+    font-weight: 600;
+}
+.todo{
+    width: 100%;
+    height: 100%;
+    position: relative;
+}
+.todolist-show{
+    cursor: pointer;
+    position: absolute;
+    top: 10px;
+    left: 100%;
+    background-color: rgb(201, 187, 224);
+    width: 40px;
+    height: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    border-radius: 0 10px 10px 0;
+}
+.todolist-show-btn i{
+    display: none;
+    font-size: 1.7rem;
+    color: #fff;
+}
+.todolist-show-btn .active{
+    display: block;
+}
+aside{
+    width: 400px;
+    background-color: rgb(201, 187, 224);
+    height: 100%;
+    top: 130px;
+    left: -400px;
+    position: fixed;
+    text-align: center;
+    display: block;
+    transition: 0.5s;
+}
+.todo-list.active{
+    left: 0;
+}
+.todo-list h1{
+    padding: 20px;
+    font-size: 1.5rem;
+    color: #fff;
+}
+.todo-list .plus-todo input[type='text']{
+    padding: 1rem;
+    border-radius: 10px;
+}
+.todo-list .plus-todo input[type='button']{
+    padding: 1rem 0.6rem;
+    border-radius: 10px;
+    background-color: #ffb5d1;
+    color:#fff;
+}
+.todo-list-action{
+    margin: 1.8rem;
+    display: flex;
+    flex:1;
+}
+.todo-lists input[type='text']{
+    padding: 1rem;
+    border-radius: 10px;
+    margin-top: 0.5rem;
+}
+.todo-lists button{
+    margin-left: 10px;
+    padding: 1rem 0.6rem;
+    border-radius: 10px;
+    color: #fff;
+}
+.main{
+    width: 100%;
+    height: auto;
+}
+.diary{
+    margin: 2rem;
+}
+.diary-link{
+    float: left;
+}
+.diary-link .diary-info{
+    padding: 1rem;
+    width: 300px;
+    height: 350px;
+    background-color: rgb(243, 243, 243);
+    text-align: center;
+    border-radius: 10px;
+    margin: 1rem;
+}
+.diary-link .diary-info img{
+    width: 250px;
+    height: 250px;
+    border-radius: 10px;
+}
+.diary-link .diary-info .diary-desc{
+    padding: 0.3rem 1rem;
+    color: #000;
+}
+
+.diary-btn a{
+    background-color: #bdceec;
+    padding:0.4rem 1.5rem;
+    color: #fff;
+    border-radius: 10px;
+    width: 100px;
+    margin: 10px 0;
+}
+.plus-diary{
+    position: fixed;
+    bottom: 2rem;
+    right: 2rem;
+    background-color: #fff;
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.24);
+    width: 5rem;
+    height: 5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 3rem;
+    border-radius: 50%;
+    color: #000;
+    transition: 0.3s;
+}
+.plus-diary:hover{
+    font-size: 3.5rem;
+}
+@media(max-width:1200px){
+    .diary-link .diary-info{
+        padding: 0.8rem;
+        width: 200px;
+        height: 250px;
+    }
+    .diary-link .diary-info img{
+        width: 150px;
+        height: 150px;
+    }
+    .diary-link .diary-info .diary-desc{
+        font-size: 0.8rem;
+        margin: 0.5rem;
+    }
+    
+    .diary-btn a{
+        color: #fff;
+    }
+}
+@media(max-width:530px){
+    .diary-link .diary-info{
+        margin: 0.3rem;
+    }
+    aside{
+        width: 300px;
+        left: -300px;
+    }
+    .header .logo span{
+        font-size: 1rem;
+    }
+}

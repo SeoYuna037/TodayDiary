@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="upload.css">
+    <link rel="stylesheet" href="upload-style.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <title>Today Diary</title>
 </head>
@@ -12,7 +12,7 @@
     <header>
         <div class="header">
             <div class="logo">
-                <img src="img/Today diary logo white.png" alt="">
+                <a href="main.html"><img src="img/Today diary logo white.png" alt=""></a>
                 <span>Today Diary</span>
             </div>
             <div class="login-button">
@@ -48,7 +48,6 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
-    <script src="https://randojs.com/1.1.0.js"></script>
     <script>
         const db=firebase.firestore();
         const sendBtn=document.querySelector('#diary-send');
@@ -58,7 +57,13 @@
         const saveData=()=>{
             var imageFile=document.querySelector('#diary-image').files[0];
             var storageRef=storage.ref();
-            var metadata={contentType:file.type}
+            
+            if(!imageFile){
+                alert('이미지 파일을 넣어주세요')
+                return;
+            }
+            
+            var metadata={contentType:imageFile.type}
             var saveDirection=storageRef.child('images/' + imageFile.name);
             var uploadImage=saveDirection.put(imageFile,metadata);
             uploadImage.on('state_changed',
@@ -68,15 +73,16 @@
                 },
                 ()=>{
                     uploadImage.snapshot.ref.getDownloadURL().then((url)=>{
-                        console.log('업로드 된 경로는',url);
+                        
+                        var dt=new Date();
+                        var today=dt.getFullYear()+'년 '+(dt.getMonth()+1)+'월 '+dt.getDate()+'일';
                         var diaryData={
                             제목:diaTitle.value,
                             내용:diaContent.value,
-                            날짜:new Date(),
+                            날짜:today,
                             이미지:url,
                             작성자:JSON.parse(localStorage.getItem('user')).userid
                         }
-                        console.log(url);
                         db.collection('diary').add(diaryData).then(()=>{
                             window.location.href="/main.html"
                         }).catch((err)=>{

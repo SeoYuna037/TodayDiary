@@ -4,31 +4,32 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="read.css">
+    <link rel="stylesheet" href="upload-style.css">
     <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/xeicon@2.3.3/xeicon.min.css">
     <title>Today Diary</title>
 </head>
 <body>
     <header>
         <div class="header">
-            <div class="logo">
-                <a href="main.html"><img src="img/Today diary logo white.png" alt=""></a>
-                <span>Today Diary</span>
-            </div>
+            <a href="main.html">
+                <div class="logo">
+                    <img src="img/Today diary logo white.png" alt="">
+                    <span>Today Diary</span>
+                </div>
+            </a>
             <div class="login-button">
                 <a href="" class="nav-link" id="signoutlink">LOGOUT</a>
             </div>
         </div>
     </header>
+    
     <section class="main">
-
-            <article class="read-diary">
-                <button id="edit">Edit</button>
-                <button id="del-diary">Delete</button>
-                <!-- <div class="read-image"></div>
-                <div class="read-title"></div>
-                <div class="read-content"></div> -->
-            </article>
+        
+        <article class="diary-upload">
+            <input type="text" id="diary-title" placeholder="제목을 입력하세요">
+            <textarea id="diary-content" cols="30" rows="10">내용을 입력하세요</textarea>
+            <button id="diary-send">저장하기</button>
+        </article>
     </section>
     <script src="/__/firebase/8.6.5/firebase-app.js"></script>
     <script src="/__/firebase/8.6.5/firebase-auth.js"></script>
@@ -48,34 +49,28 @@
         };
         firebase.initializeApp(firebaseConfig);
     </script>
-    
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js" integrity="sha256-/xUj+3OJU5yExlq6GSYGSHk7tPXikynS7ogEvDej/m4=" crossorigin="anonymous"></script> 
     <script>
         const db=firebase.firestore();
         const storage=firebase.storage();
-        var queryString=new URLSearchParams(window.location.search);
-        db.collection('diary').doc(queryString.get('id')).get().then((result)=>{
-            var readDiary=document.querySelector('.read-diary');
-            readDiary.insertAdjacentHTML('afterend',
-                `<div class="read-image">
-                    <img src="${result.data().이미지}">
-                    </div>
-                <div class="read-title"><h1>${result.data().제목}</h1></div>
-                <div class="read-content">${result.data().내용}</div>
-                <div class="read-date">${result.data().날짜}</div>
-                `)
+        var queryString = new URLSearchParams(window.location.search);
+
+        db.collection('diary').doc( queryString.get('id') ).get().then((result)=>{
+        $('#diary-title').val(result.data().제목)
+        $('#diary-content').val(result.data().내용)
         })
-        const editBtn=document.getElementById('edit');
-        editBtn.addEventListener('click',function(){
-            window.location.href="/edit.html?id="+queryString.get('id')
-        })
-        document.querySelector('#del-diary').addEventListener('click',function(){
-            db.collection("diary").doc(queryString.get('id')).delete().then(()=>{
-                window.location.href="/main.html"
-            })
-        })
+        $('#diary-send').click(function(){
+        var changeData = {
+            제목 : $('#diary-title').val(),
+            내용 : $('#diary-content').val() 
+        }
+
+        db.collection('diary').doc(queryString.get('id')).update(changeData);
+        alert("저장되었습니다");
         
-    </script>
+    })
     
+    </script>
     <script>
 
         let userlink=document.getElementById('userlink');
@@ -91,11 +86,9 @@
             if(currentUser==null){
                 signoutlink.innerText="Login";
                 signoutlink.href="index.html";
-                console.log(currentUser.userid);
             }
             else{
                 signoutlink.innerText="LOGOUT";
-                signoutlink.href="index.html";
             }
         }
         signoutlink.addEventListener('click',Signout)
