@@ -28,6 +28,9 @@ a{
 .login-logo{
     text-align: center;
     color: white;
+    animation: fadeIn 1s linear;
+}
+.login-log img{
 }
 .login-logo h1{
     font-size: 3rem;
@@ -45,6 +48,7 @@ a{
     width: 500px;
     display: block;
     border-radius: 10px;
+    animation: fadeIn 2s linear;
 }
 .login-form h1{
     font-size: 2rem;
@@ -107,4 +111,14 @@ a{
 }
 .sign-up a:hover{
     text-decoration: underline;
+}
+@keyframes fadeIn {
+    0%{
+      opacity: 0;
+      
+    }
+  
+    100%{
+        opacity: 1;
+    }
 }
