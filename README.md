@@ -8,7 +8,7 @@ Firebase를 활용하여 사용자의 정보 및 일기, Todo List를 저장합�
 
 
 ### 사용 기술
--HTML5, CSS3, JavaScript, Firebase
+-HTML5, CSS3, JavaScript, Firebase, JQuery
 
 
 ### 디렉토리
