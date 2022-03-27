@@ -34,14 +34,19 @@ Firebase를 활용하여 사용자의 정보 및 일기, Todo List를 저장합�
 #### 2.로그인
 >회원가입한 아이디와 비밀번호로 로그인을 합니다.
 
+<img src="https://user-images.githubusercontent.com/96972549/160272109-cb5ae298-4018-4334-af0f-35ca42acd60f.gif">
 
 #### 3.일기 작성하기
 >사진 하나와 내용을 적어 일기를 저장할 수 있습니다.
 
+<img src="https://user-images.githubusercontent.com/96972549/160272152-faa360dd-2e48-4b79-8f03-93ad88c2ca74.gif">
 
 #### 4.일기 상세 페이지
 >일기 상세 페이지에 들어가 일기를 수정 및 삭제할 수 있습니다.
 
+<img src="https://user-images.githubusercontent.com/96972549/160272172-fdb23cff-cd8d-4188-a0cf-f76c73b21308.gif">
 
 #### 5.투두 리스트
 >할 일을 추가 및 삭제할 수 있습니다.
+
+<img src="https://user-images.githubusercontent.com/96972549/160272184-cef16620-51e7-4b85-9bf0-65123305c3c7.gif">
