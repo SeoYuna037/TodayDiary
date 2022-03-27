@@ -5,7 +5,10 @@ Today Diary는 프로젝트 제목처럼 오늘 하루 있었던 일을 기록�
 또한 Todo List 기능을 추가하여 사용자는 원할 때면 언제든 하고자 하는 일을 작성 및 삭제할 수 있습니다.
 로그인 할 경우 Local Storage에 사용자 정보가 저장되며 이를 통하여 작성자를 확인합니다.
 Firebase를 활용하여 사용자의 정보 및 일기, Todo List를 저장합니다
-
+배포 또한 Firebase로 진행하였습니다
+테스트 계정 정보
+ID:test
+password:testtest
 
 ### 사용 기술
 -HTML5, CSS3, JavaScript, Firebase, JQuery
