@@ -53,3 +53,23 @@ password:testtest
 >할 일을 추가 및 삭제할 수 있습니다.
 
 <img src="https://user-images.githubusercontent.com/96972549/160272184-cef16620-51e7-4b85-9bf0-65123305c3c7.gif">
+
+
+### 주요코드
+>회원가입 유효성 검사
+<img src="https://user-images.githubusercontent.com/96972549/163721904-95aaea35-699a-436c-8498-366c645e275b.png">
+
+>로그인 확인
+<img src="https://user-images.githubusercontent.com/96972549/163721870-33d30f7e-c76d-4731-9776-14ef99297195.png">
+
+>투두 리스트 추가 및 삭제 (시간 순 정렬)
+<img src="https://user-images.githubusercontent.com/96972549/163721938-672c0a95-ca34-47dc-a8d4-e9bf8900abaf.png">
+
+>작성자와 로그인 아이디가 같을 경우 해당 일기만 보여주는 코드
+<img src="https://user-images.githubusercontent.com/96972549/163721987-316a1208-4b65-4719-b529-59bcac9a9352.png">
+
+>일기 추가
+<img src="https://user-images.githubusercontent.com/96972549/163722061-88f671a9-5c96-4b66-a4a9-ee8260ed51ec.png">
+
+>일기 수정 (JQuery)
+<img src="https://user-images.githubusercontent.com/96972549/163722035-c6a6d063-56d8-4e7b-96a2-a599f633298c.png">
